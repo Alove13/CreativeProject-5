@@ -1,5 +1,6 @@
 <html>
 <head>
+  <title>Lovely Recipes</title>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script src="javascripts/recipeClient.js"></script>
@@ -12,7 +13,7 @@
  <div class="searchInfo">
   <form ng-submit="updatePastSearches()">
     <input type="text" ng-model="inputRecipe">
-    <button type="submit">Search</button>
+    <button ng-click="recipeSearch()" type="submit">Search</button>
   </form>
  <p>Show Past Searches: <span><input type="checkbox" ng-model="trigger"></span></p>
  <ul ng-show="trigger" ng-repeat="x in pastSearches">
