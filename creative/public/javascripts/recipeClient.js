@@ -1,40 +1,39 @@
 angular.module('recipeApp', [])
-.factory('recipeFetcher', recipeFetcher)
-.controller('recipeCtrl', recipeCtrl)
-function recipeFetcher ($http) {
- var API_ROOT = 'savedRecipes'
- return {
-  get: function() {
-   return $http
-   .get(API_ROOT)
-   .then(function(response){
-    return response.data
+.controller('recipeCtrl',[
+'$scope',
+'$http',
+function($scope, $http) {
+ $scope.test = "Made with Love, by Love"
+ $scope.recipeList = []
+ 
+ $scope.searchAPI = function() {
+  $scope.recipeList = []
+  var foodURL = "Recipes?q="+$scope.mySearch
+  $.getJSON(foodURL, function(data){
+   var nameNurl
+     $.each(data.recipes, function(i, val){
+      nameNurl = {title: val.title, url: val.source_url}
+      $scope.recipeList.push(nameNurl)
+     })
    })
-  },
-
-  tryit: function() {
-   var recipeUrl = "/savedRecipes"
-   return $http
-    .get(recipeUrl)
-    .then(function(response) {
-     console.log("get worked!")
-     console.log("data: ", data)
-     return response.data    
-    })
   }
  
- }//all returned stuff
-}//end of factory
-
-function recipeCtrl ($scope, recipeFetcher) {
- $scope.test = "Made with Love, by Love"
  
- $scope.pastSearches = []//this will be stored in Mongo to help for future searches
- $scope.savedRecipes = []//this object will be sent to server to be added to mongo to remember foreva!
 
- $scope.updatePastSearches = function() {
-  $scope.pastSearches.push({search: $scope.inputRecipe}) //will be wiped unless send to DB
-  //  console.log($scope.inputRecipe.search)
+ $scope.create = function(x){
+  return $http.post('/saved', x).then(function(data){
+   console.log("sent this data to be saved:", data)
+  })
+ }
+ 
+
+ $scope.saveRecipe = function(recipe){
+ if($scope.mySearch === ''){return}
+	//console.log("in saveRecipe")
+	$scope.create({
+	 title: recipe.title,
+	 url: recipe.url
+	}) 
  }
 
-}
+}])//end of controller
