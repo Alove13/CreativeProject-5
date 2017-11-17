@@ -21,7 +21,10 @@
  
  
 <p>Show Searched Recipes: <span><input type="checkbox" ng-model="trigger"></span></p>
-<p>stuff aught to show up below here</p>
+<p>API is slow, so be patient after click search</p>
+<p>If after a little while nothing is appearing, try clicking the checkbox a few times</p>
+<p>After list of recipes appears, either click on some links or click the save button</p>
+<p>Finally, click checkbox to hide the recipes and then click 'Show Saved Recipes' button twice to see what saved! </p>
  <ul ng-show="trigger"  ng-repeat="recipe in recipeList">
   <li>{{recipe.title}}  --
   <span><a ng-href="{{recipe.url}}">{{recipe.url}}</a></span>

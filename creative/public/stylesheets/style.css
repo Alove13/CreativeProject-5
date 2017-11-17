@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+ background-color: black;
 }
 
 a {
@@ -13,7 +14,7 @@ a {
  position: absolute;
  margin: 10%;
  padding: 10%;
- background-color: darkgrey; 
+ background-color: red; 
 }
 .allContent:hover {
  background-color: lightblue;
