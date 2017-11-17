@@ -18,7 +18,7 @@
     <input type="text" ng-model="mySearch" name="text">
     <input type="submit" id="submit" value="Submit">
   </form>
- </div> 
+ 
  
 <p>Show Searched Recipes: <span><input type="checkbox" ng-model="trigger"></span></p>
 <p>stuff aught to show up below here</p>
@@ -28,6 +28,16 @@
   <button class="glyphicon glyphicon-save" ng-click="saveRecipe(recipe)"></button>
   </li>
  </ul>
+
+ <button ng-click="showSaved()">Show Saved Recipes</button> 
+ <button ng-click="deleteSaved()">Delete All Saved Recipes</button>
+ <ul ng-repeat="x in savedRecipes">
+  <li>{{x.title}}  --
+  <span><a ng-href="{{x.url}}">{{x.url}}</a></span>
+ </ul>
+
+ </div>
+
 
 <div class="allSections">
  <div class="topSection">

@@ -5,7 +5,8 @@ angular.module('recipeApp', [])
 function($scope, $http) {
  $scope.test = "Made with Love, by Love"
  $scope.recipeList = []
- 
+ $scope.savedRecipes = []
+
  $scope.searchAPI = function() {
   $scope.recipeList = []
   var foodURL = "Recipes?q="+$scope.mySearch
@@ -18,7 +19,19 @@ function($scope, $http) {
    })
   }
  
- 
+ $scope.showSaved = function() {
+  //return $http.get('/saved').then(function(data){
+  $.getJSON('/saved', function(data){
+  //console.log("hopefully got saved Data from DB: ", data)
+  var temp
+  $.each(data, function(i, val){
+  temp = {title: val.title, url: val.url}
+//  console.log("temp ", temp.title)
+  $scope.savedRecipes.push(temp)
+  })
+  })  
+ } 
+
 
  $scope.create = function(x){
   return $http.post('/saved', x).then(function(data){
@@ -35,5 +48,16 @@ function($scope, $http) {
 	 url: recipe.url
 	}) 
  }
+
+  $scope.deleteSaved = function() {
+   $.ajax({
+    url:'savedDelete',
+    type:'DELETE',
+    success: function(){
+      console.log("deleted successfully")
+      savedRecipes = []
+    }
+   })
+  }
 
 }])//end of controller

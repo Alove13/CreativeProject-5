@@ -27,9 +27,19 @@ router.post('/saved', function(req, res, next){
  var recipe = new Recipe(req.body)
  recipe.save(function(err, recipe){
   if(err) {return next(err)}
-   console.log("in /saved route recipe: ",recipe)
+//   console.log("in /saved route recipe: ",recipe)
    res.json(recipe) 
+  })
 })
+
+router.delete('/savedDelete', function(req, res, next){
+ Recipe.remove({}, function(err, removedStuff){
+  if(err) return console.error(err)
+  else {
+   console.log(removedStuff)
+   res.sendStatus(200)
+  }
+ })
 })
 
 module.exports = router;
